@@ -1,0 +1,48 @@
+CREATE DATABASE TV;
+USE TV;
+
+CREATE TABLE TVChannels (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titlu VARCHAR(100),
+    channel_no INT
+);
+
+CREATE TABLE Clients (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nume VARCHAR(100),
+    prefernces VARCHAR(50)
+);
+
+CREATE TABLE TV_Clients (
+    id_TVChannels INT,
+    id_Clients INT,
+    PRIMARY KEY (id_TVChannels, id_Clients),
+    FOREIGN KEY (id_TVChannels) REFERENCES TVChannels(id),
+    FOREIGN KEY (id_Clients) REFERENCES Clients(id)
+);
+SHOW TABLES;
+DESCRIBE Clients;
+
+-- Inserting a client
+INSERT INTO Clients (nume, prefernces) VALUES ('Marius Oana', 'Comedie'),
+('Andrei Stanga', 'Telenovela'),
+('Tatian Cosma', 'Reality Show'),
+('Costin Manta', 'Stiri'),
+('Bogdan Caras', 'Filme'),
+('Ionut Schiopu', 'Documentare'),
+('Alexandru Zotec', 'Desene Animate');
+
+-- Inserting an TV Channel
+INSERT INTO TVChannels (titlu, channel_no) VALUES ('Realitatea TV', 43),
+('Comedy Central', 53),
+('Kanal D', 98),
+('ProTV',2),
+('HBO 1', 80),
+('National Geographic', 10),
+('Disney Channel', 22);
+
+-- Link between Client and TV Channel
+INSERT INTO TV_Clients (id_TVChannels, id_Clients) VALUES (1, 2), (1, 4), (2, 3), (2, 4), (3, 4), (3, 3), (4, 1), (4, 4), (5, 5), (5, 3), (6, 6), (7, 7);
+SELECT * FROM TVChannels;
+SELECT * FROM TV_Clients;
+DROP DATABASE TV;
